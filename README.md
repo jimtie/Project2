@@ -21,10 +21,11 @@ Albums & Photos
 9. Albums page should contain: Name Description Edit album detail Delete album Add a photo
 
 ## Wireframes
-![image]()
+![image](image/project_2_wireframe.jpeg)
+![image](image/Image_from_iOS.jpg)
 
 ## ERD
-![image]()
+![image](image/Image_from_iOS copy.jpg)
 
 ## Technologies
 Python | Django | AJAX | HTML | CSS | JavaScript | Bootstrap 
