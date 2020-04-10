@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for photo in photos %}
+  <div class="card">
+  	<a href="{% url 'photos_detail' photo.id %}">
+	    <div class="card-content" style= "width:250 ; height:auto;">
+	      <img src = "{{photo.image_link}}">
+	    </div>
+	</a>    
+  </div>
+
+{% endfor %}
+{% endblock %}
