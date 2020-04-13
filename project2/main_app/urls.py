@@ -9,4 +9,10 @@ urlpatterns = [
 	path('photos/<int:photo_id>/', views.photos_detail, name='photos_detail'),
 	path('album/createalbum/', views.album_createalbum, name='createalbum'),
 	path('albums/<int:album_id>/assoc_photo/<int:photo_id>/', views.assoc_photo, name='assoc_photo'),
+	path('albums/<int:album_id>/<int:photo_id>', views.photos_detail, name='photos_detail'),
+	path('photo/', views.PhotoList.as_view(), name='photo_index'),
+    path('photo/<int:pk>/', views.PhotoDetail.as_view(), name='photo_detail'),
+    path('photo/create/', views.PhotoCreate.as_view(), name='photo_create'),
+    path('photo/<int:pk>/update/', views.PhotoUpdate.as_view(), name='photo_update'),
+    path('photo/<int:pk>/delete/', views.PhotoDelete.as_view(), name='photo_delete'),
 ]
