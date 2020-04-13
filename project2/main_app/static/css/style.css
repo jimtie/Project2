@@ -20,3 +20,6 @@ nav {
 img {
 	align-content: center;
 }
+.navbar-brand {
+  font-family: "Roboto", sans-serif;
+}

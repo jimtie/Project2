@@ -1,34 +1,57 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div id="photogrid"></div>
-<!-- {% for album in albums %} -->
-<script>
-	album forEach(photo => {
-		$(“#photogrid”).append(`${albumPhotos(album)}`)
-	});
-function albumPhotos (album) {
-	return 
-	`<div class="container my-4">
-		<div class="row">
-			<div class="col-lg-4 col-md-12 mb-4">
-        		<img src="{{album.photos.image_link}}" class="img-fluid mb-4" style= "width:250 ; height:auto;">
-      		</div>
-    	</div>
+<!-- <div id="photogrid" class="row">
+{% for photo in album.photos.all %}
+	<div class="col-md-4 mb-2 flex-column fluid">
+	    <div class="card">
+	      <div class="card-content">
+	        <h1>a</h1>
+	      </div>
+	    </div>
 	</div>
-	`;
-};
-// <div class="container my-4">
-// 	<div class="row">
-// 		<div class="col-lg-4 col-md-12 mb-4">
-//         	<img src="{{album.photos.image_link}}" class="img-fluid mb-4" style= "width:250 ; height:auto;">
-//         	<img src="http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(66).jpg" class="img-fluid mb-4" alt=""
-//           data-wow-delay="0.3s">
-//       	</div>
-//     </div>
-// </div>
+{% endfor %}
+</div> -->
 
-</script>
-<!-- {% endfor %} -->
+
+<div class="row">
+  <div class="col s6">
+    <h3>{{ album.name }}'s Photos</h3>
+    {% if album.photos.count %}
+      {% for photo in album.photos.all %}
+        <div class="card">
+          <div class="card-content">
+            <img src = "{{photo.image_link}}" class="card-img">
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Photos :(</h5>
+    {% endif %}
+  </div>
+  <div class="col s6">
+    <h3>Available Photos</h3>
+    {% if photos.count %}
+      {% for photo in photos.all %}
+        <div class="card">
+          <div class="card-content">
+            <div class="card-content">
+            <img src = "{{photo.image_link}}" class="card-img">
+          </div>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_photo' album.id photo.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{album.name}} Already Has All Photos Available</h5>
+    {% endif %}
+  </div>
+</div>
+
 
 {% endblock %}
