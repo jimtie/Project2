@@ -8,4 +8,5 @@ urlpatterns = [
 	path('albums/<int:album_id>/', views.albums_detail, name='albums_detail'),
 	path('photos/<int:photo_id>/', views.photos_detail, name='photos_detail'),
 	path('album/createalbum/', views.album_createalbum, name='createalbum'),
+	path('albums/<int:album_id>/assoc_photo/<int:photo_id>/', views.assoc_photo, name='assoc_photo'),
 ]
