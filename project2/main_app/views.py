@@ -37,6 +37,9 @@ def signup(request):
 def home(request):
 	return render(request, 'home.html')
 
+def about(request):
+    return render(request, 'about.html')
+
 @login_required 
 def albums_index(request):
 	albums = Album.objects.filter(user=request.user)
