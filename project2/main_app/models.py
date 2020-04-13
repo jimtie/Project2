@@ -11,6 +11,9 @@ class Photo(models.Model):
 	def __str__(self):
 		return self.name
 
+	def get_absolute_url(self):
+		return reverse("photo_detail", kwargs={'pk': self.id})
+
 # class User(models.Model):
 # 	email = models.Email(max_length=200)
 # 	password = models.

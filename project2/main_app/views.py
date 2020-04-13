@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Album, Photo
 # from .forms import AlbumForm, PhotoForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 
 
 # Define the home view
@@ -16,7 +18,8 @@ def albums_index(request):
 
 def albums_detail(request,album_id):
 	album = Album.objects.get(id=album_id)
-	photos_album_doesnt_have = Album.objects.exclude(id__in = album.photos.all().values_list('id'))
+	photos_album_doesnt_have = Photo.objects.exclude(id__in = album.photos.all().values_list('id'))
+	print (photos_album_doesnt_have)
 	return render(request, 'albums/detail.html', {'album': album, 'photos': photos_album_doesnt_have})
 
 def photos_index(request):
@@ -47,3 +50,32 @@ def photo_createphoto(request):
 		new_photo_id = photo_id
 		new_photo.save()
 	return redirect('photos', photo_id = photo_id)
+
+
+class PhotoList(ListView):
+    model = Photo
+
+class PhotoDetail(DetailView):
+    model = Photo
+
+class PhotoCreate(CreateView):
+    model = Photo
+    fields = '__all__'
+
+class PhotoUpdate(UpdateView):
+    model = Photo
+    fields = ['name', 'description']
+
+class PhotoDelete(DeleteView):
+    model = Photo
+    success_url = '/photo/'
+
+
+
+
+
+
+
+
+
+

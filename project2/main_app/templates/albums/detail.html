@@ -14,43 +14,26 @@
 </div> -->
 
 
+<h3>{{ album.name }}'s Photos</h3>
 <div class="row">
-  <div class="col s6">
-    <h3>{{ album.name }}'s Photos</h3>
+  
+    
     {% if album.photos.count %}
       {% for photo in album.photos.all %}
+      <div class="col-md-4">
         <div class="card">
           <div class="card-content">
-            <img src = "{{photo.image_link}}" class="card-img">
+            <a href="{% url 'photos_detail' photo.id %}">
+              <img src = "{{photo.image_link}}" class="card-img">
+            </a>
           </div>
         </div>
+      </div>
       {% endfor %}
     {% else %}
       <h5>No Photos :(</h5>
     {% endif %}
-  </div>
-  <div class="col s6">
-    <h3>Available Photos</h3>
-    {% if photos.count %}
-      {% for photo in photos.all %}
-        <div class="card">
-          <div class="card-content">
-            <div class="card-content">
-            <img src = "{{photo.image_link}}" class="card-img">
-          </div>
-          </div>
-          <div class="card-action">
-            <form action="{% url 'assoc_photo' album.id photo.id %}" method="POST">
-              {% csrf_token %}
-              <button type="submit" class="btn">Add</button>
-            </form>
-          </div>
-        </div>
-      {% endfor %}
-    {% else %}
-      <h5>{{album.name}} Already Has All Photos Available</h5>
-    {% endif %}
-  </div>
+  
 </div>
 
 
