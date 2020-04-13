@@ -17,9 +17,15 @@
         <a class="navbar-brand" href="/">inFrared</a>
         <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <!-- <li><a href="/about">About</a></li> -->
-          <li class="nav-item"><a href="/albums" class="nav-link">Albums</a></li>
-          <li class="nav-item"><a href="/photos" class="nav-link">Photos</a></li>
+          {% if user.is_authenticated %}
+            <li class="nav-item"><a href="/albums" class="nav-link">Albums</a></li>
+            <li class="nav-item"><a href="/photos" class="nav-link">Photos</a></li>
+            <li class="nav-item"><a href="{% url 'album_createalbum' %}">Create an Album</a></li>
+            <li class="nav-item nav-link"><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
