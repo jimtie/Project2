@@ -2,6 +2,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-image: url(https://img.freepik.com/free-photo/full-frame-shot-brown-leather-background_23-2147951253.jpg?size=626&ext=jpg);
   /*font-family: 'Baloo Paaji 2', cursive;*/
 }
 main {
@@ -12,8 +13,8 @@ footer {
   text-align: right;
   background-color: black;
 }
-nav {
-	background-color: black;
+.nav {
+	background-color: black	;
 }
 .page-footer {
 	background-color: black;
