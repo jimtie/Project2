@@ -151,6 +151,7 @@ class PhotoDetail(LoginRequiredMixin, DetailView):
 class PhotoCreate(LoginRequiredMixin, CreateView):
 		model = Photo
 		fields = '__all__'
+		success_url = '/photos/'
 
 class PhotoUpdate(LoginRequiredMixin, UpdateView):
 		model = Photo
