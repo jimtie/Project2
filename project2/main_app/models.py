@@ -18,8 +18,10 @@ class Photo(models.Model):
 # class User(models.Model):
 # 	name = models.CharField(max_length=200)
 # 	password = models.CharField(max_length=100)
-# 	photos = models.ManyToManyField(Photo)
+# 	# photos = models.ManyToManyField(Photo)
 # 	# albums = models.ForeignKey()
+# 	# user = User.objects.get(id=user_id)
+# 	# staffprofile.user = user
 
 # 	def __str__(self):
 # 		return self.name
