@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Albums</h1>
+{% for album in albums %}
+
+  <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ album.name }}</h5>
+    <p class="card-text">Description: {{ album.description }}</p>
+    <a href="{% url 'albums_detail' album.id %}" class="btn btn-primary">View Photos</a>
+  </div>
+</div>
+
+{% endfor %}
+{% endblock %}

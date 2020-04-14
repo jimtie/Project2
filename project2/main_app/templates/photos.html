@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row flex-row">
+{% for photo in photos %}
+<div class="col-md-4 mb-2 flex-column fluid">
+	<div class="card text-right flex-column">
+		<a href="{% url 'photos_detail' photo.id %}">
+			<img class="card-img shadow" src="{{photo.image_link}}" alt="Card image">
+		</a>
+	</div>
+</div>
+
+{% endfor %}
+<div>
+{% endblock %}
+
