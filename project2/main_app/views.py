@@ -11,26 +11,31 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+# from django.urls import reverse_lazy
+# from bootstrap_modal_forms.generic import BSModalCreateView
+# from .forms import CustomUserCreationForm
+
+
 
 
 def signup(request):
-  error_message = ''
-  if request.method == 'POST':
-    # This is how to create a 'user' form object
-    # that includes the data from the browser
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-      # This will add the user to the database
-      user = form.save()
-      # This is how we log a user in via code
-      login(request, user)
-      return redirect('album_index')
-    else:
-      error_message = 'Invalid sign up - try again'
-  # A bad POST or a GET request, so render signup.html with an empty form
-  form = UserCreationForm()
-  context = {'form': form, 'error_message': error_message}
-  return render(request, 'registration/signup.html', context)
+	error_message = ''
+	if request.method == 'POST':
+		# This is how to create a 'user' form object
+		# that includes the data from the browser
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			# This will add the user to the database
+			user = form.save()
+			# This is how we log a user in via code
+			login(request, user)
+			return redirect('album_index')
+		else:
+			error_message = 'Invalid sign up - try again'
+	# A bad POST or a GET request, so render signup.html with an empty form
+	form = UserCreationForm()
+	context = {'form': form, 'error_message': error_message}
+	return render(request, 'registration/signup.html', context)
 
 
 # Define the home view
@@ -38,7 +43,7 @@ def home(request):
 	return render(request, 'home.html')
 
 def about(request):
-    return render(request, 'about.html')
+	return render(request, 'about.html')
 
 @login_required 
 def albums_index(request):
@@ -60,12 +65,14 @@ def photos_index(request):
 @login_required 
 def photos_detail(request, photo_id):
 	photo = Photo.objects.get(id=photo_id)
-	return render(request, 'photos/detail.html', {'photo': photo})
+	albums = Album.objects.all()
+	albums_photo_doesnt_have = Album.objects.exclude(id__in = photo.albums.all().values_list('id'))
+	return render(request, 'photos/detail.html', {'photo': photo, 'albums':albums, 'albumno': albums_photo_doesnt_have})
 
 @login_required 
 def assoc_photo(request, album_id, photo_id):
-  Album.objects.get(id=album_id).photos.add(photo_id)
-  return redirect('albums_detail', album_id=album_id)
+	Album.objects.get(id=album_id).photos.add(photo_id)
+	return redirect('albums_detail', album_id=album_id)
 	
 
 # def album_createalbum(request):
@@ -79,26 +86,26 @@ def assoc_photo(request, album_id, photo_id):
 
 @login_required 
 def album_createalbum(request):
-    # If a post request is made to this view function
-    if request.method == 'POST':
-        # We save the form data to a new variable
-        form = AlbumForm(request.POST)
-        # We make sure the data passes validations
-        if form.is_valid():
-            # If it does, associate album with logged in user and 
-            # save it in the database
-            album = form.save(commit=False)
-            album.user = request.user
-            album.save()
-            # Redirect the user to the new album's detail page
-            return redirect('albums_detail', album.id)
-    else:
-        # If it's a get request, load the form from forms.py
-        form = AlbumForm()
-    # Save the form to a new variable
-    context = { 'form': form }
-    # Render the album form template with the form
-    return render(request, 'albums/album_form.html', context)
+		# If a post request is made to this view function
+		if request.method == 'POST':
+				# We save the form data to a new variable
+				form = AlbumForm(request.POST)
+				# We make sure the data passes validations
+				if form.is_valid():
+						# If it does, associate album with logged in user and 
+						# save it in the database
+						album = form.save(commit=False)
+						album.user = request.user
+						album.save()
+						# Redirect the user to the new album's detail page
+						return redirect('albums_detail', album.id)
+		else:
+				# If it's a get request, load the form from forms.py
+				form = AlbumForm()
+		# Save the form to a new variable
+		context = { 'form': form }
+		# Render the album form template with the form
+		return render(request, 'albums/album_form.html', context)
 
 @login_required 
 def photo_createphoto(request):
@@ -111,22 +118,22 @@ def photo_createphoto(request):
 
 
 class PhotoList(LoginRequiredMixin, ListView):
-    model = Photo
+		model = Photo
 
 class PhotoDetail(LoginRequiredMixin, DetailView):
-    model = Photo
+		model = Photo
 
 class PhotoCreate(LoginRequiredMixin, CreateView):
-    model = Photo
-    fields = '__all__'
+		model = Photo
+		fields = '__all__'
 
 class PhotoUpdate(LoginRequiredMixin, UpdateView):
-    model = Photo
-    fields = ['name', 'description']
+		model = Photo
+		fields = ['name', 'description']
 
 class PhotoDelete(LoginRequiredMixin, DeleteView):
-    model = Photo
-    success_url = '/photo/'
+		model = Photo
+		success_url = '/photos/'
 
 # @login_required 
 # def choose_album(request, photo_id):
@@ -142,6 +149,12 @@ class PhotoDelete(LoginRequiredMixin, DeleteView):
 #   # and any required info as a kwarg after that
 #   return redirect('detail', photo_id=photo_id)
 
+
+# class SignUpView(BSModalCreateView):
+#     form_class = CustomUserCreationForm
+#     template_name = 'registration/signup.html'
+#     success_message = 'Success: Sign up succeeded. You can now Log in.'
+#     success_url = reverse_lazy('index')
 
 
 
