@@ -23,3 +23,12 @@ img {
 .navbar-brand {
   font-family: "Roboto", sans-serif;
 }
+a {
+  color: white;
+}
+
+.carousel-item img {
+  width: auto;
+  height: 225px;
+  max-height: 225px;
+}

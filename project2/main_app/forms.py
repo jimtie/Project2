@@ -9,3 +9,10 @@ class PhotoForm(ModelForm):
 	class Meta:
 		model = Photo
 		fields = ['name', 'description', 'image_link']
+
+class AlbumOptForm(ModelForm):
+	"""docstring for AlbumOptForm"""
+	class Meta:
+        model = AlbumOpt
+        fields = ['name']
+		
