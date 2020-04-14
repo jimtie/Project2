@@ -44,13 +44,24 @@
 
 <div class="col s6">
     <h3>Available albums</h3>
-    {% if albums.count %}
-      {% for album in albums.all %}
+    {% for album in albums %}
+  <div class="card">
+    <a href="{% url 'albums_detail' album.id %}">
+      <div class="card-content">
+        <span class="card-title">{{ album.name }}</span>
+        <p>Description: {{ album.description }}</p>
+      </div>
+  </a>    
+  </div>
+
+{% endfor %}
+<!--     {% if albums.count %} -->
+      {% for album in albums %}
         <div class="card">
           <div class="card-content">
             <div class="card-content">
             <a href="{% url 'photos_detail' photo.id %}">
-              <h5>{{album.name}}</h5>
+              <h5>{{album.name}}1</h5>
             </a>
           </div>
           <div class="card-action">
@@ -61,14 +72,14 @@
           </div>
         </div>
       {% endfor %}
-    {% else %}
+<!--     {% else %}
       <h5>{{photo.name}} Already Has All albums Available</h5>
-    {% endif %}
+    {% endif %} -->
 </div>
 
 
 
-<script>
+<!-- <script>
   $.ajax({
   method: "GET",
   url: `http://localhost:8000/albums`,
@@ -92,5 +103,5 @@
   // console.log(album.name);
   // }
   // showoptions();
-</script>
+</script> -->
 {% endblock %}

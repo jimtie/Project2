@@ -4,7 +4,26 @@
   <h4>Are you sure you want to delete <span class="teal-text">{{ object.name }}</span>?</h4>
   <form action="" method="POST">
     {% csrf_token %}
-    <input type="submit" value="Yes - Delete!" class="btn btn-danger">
+    <a type="submit" value="Yes - Delete!" class="btn btn-danger" id="deletebtn">
     <a href="{% url 'photo_detail' object.id %}">Cancel</a>
   </form>
+
+  <script>
+
+  document.getElementById("deletebtn").addEventlistener('click',
+  	function deletePost(event) {
+  const postId = event.target.parentNode.parentNode.id
+  console.log("Deleting Supply Id = ", postId)
+  alert("Comment Deleted!")
+}
+  );
+  // fetch(`${API_BASE}/supplies/${supplyId}/posts/${postId}`, {
+  //   method: "DELETE",
+  // })
+  // .then((stream) => stream.json())
+  // .then((res) => {
+  //   getSupplyEach();
+  // })
+  // .catch((err) => console.log(err))
+  </script>
 {% endblock %}
