@@ -65,7 +65,7 @@ def photos_detail(request, photo_id):
 @login_required 
 def assoc_photo(request, album_id, photo_id):
   Album.objects.get(id=album_id).photos.add(photo_id)
-  return redirect('photos_detail', album_id=album_id)
+  return redirect('albums_detail', album_id=album_id)
 	
 
 # def album_createalbum(request):
@@ -128,6 +128,19 @@ class PhotoDelete(LoginRequiredMixin, DeleteView):
     model = Photo
     success_url = '/photo/'
 
+# @login_required 
+# def choose_album(request, photo_id):
+#   # create an instance of the model using the ModelForm and POST data
+#   form = AlbumOptForm(request.POST)
+#   # validate the form
+#   if form.is_valid():
+#     # first assign the Feeding to a photo using photo_id
+#     new_feeding = form.save(commit=False)
+#     new_feeding.photo_id = photo_id
+#     new_feeding.save()
+#   # redirect takes the name of the URL as the first arg, 
+#   # and any required info as a kwarg after that
+#   return redirect('detail', photo_id=photo_id)
 
 
 

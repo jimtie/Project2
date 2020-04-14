@@ -12,17 +12,16 @@
         <a href="{% url 'photo_update' photo.id %}" class="btn btn-primary">Edit</a>
         <a href="{% url 'photo_delete' photo.id %}" class="btn btn-danger">Delete</a>
       </div>
+
       <form>
         <div class="form-row align-items-center">
           <div class="col-auto my-1">
             <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
               <option selected>Choose...</option>
-
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-
+              {% for album in albums.all %}
+                <option value="">{{ album.name }}</option>
+              {% endfor %}
             </select>
           </div>
           <div>
@@ -37,10 +36,50 @@
         </div>
         </div>
       </form>
+
     </div>
   </div>
 </div>
-<script>
+
+
+<div class="col s6">
+    <h3>Available albums</h3>
+    {% for album in albums %}
+  <div class="card">
+    <a href="{% url 'albums_detail' album.id %}">
+      <div class="card-content">
+        <span class="card-title">{{ album.name }}</span>
+        <p>Description: {{ album.description }}</p>
+      </div>
+  </a>    
+  </div>
+
+{% endfor %}
+<!--     {% if albums.count %} -->
+      {% for album in albums %}
+        <div class="card">
+          <div class="card-content">
+            <div class="card-content">
+            <a href="{% url 'photos_detail' photo.id %}">
+              <h5>{{album.name}}1</h5>
+            </a>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_photo' album.id photo.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+<!--     {% else %}
+      <h5>{{photo.name}} Already Has All albums Available</h5>
+    {% endif %} -->
+</div>
+
+
+
+<!-- <script>
   $.ajax({
   method: "GET",
   url: `http://localhost:8000/albums`,
@@ -64,5 +103,5 @@
   // console.log(album.name);
   // }
   // showoptions();
-</script>
+</script> -->
 {% endblock %}
