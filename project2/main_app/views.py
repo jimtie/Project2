@@ -77,7 +77,8 @@ def photos_index(request):
 @login_required 
 def albums_detail(request,album_id):
 	album = Album.objects.get(id=album_id)
-	photos = Photo.objects.all()
+	# photos = Photo.objects.all()
+	photos = album.photo_set.all()
 	# photos_album_doesnt_have = Photo.objects.exclude(id__in = album.photos.all().values_list('id'))
 	# print (photos_album_doesnt_have)
 	return render(request, 'albums/detail.html', {'album': album, 'photos': photos})
@@ -154,6 +155,7 @@ class PhotoCreate(LoginRequiredMixin, CreateView):
 class PhotoUpdate(LoginRequiredMixin, UpdateView):
 		model = Photo
 		fields = ['name', 'description']
+		success_url = '/photos/'
 
 class PhotoDelete(LoginRequiredMixin, DeleteView):
 		model = Photo

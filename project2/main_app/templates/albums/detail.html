@@ -4,8 +4,8 @@
 <div class="row">
   <div class="col s6">
     <h3>{{ album.name }}'s photos</h3>
-    {% if album.photos.count %}
-      {% for photo in album.photos %}
+    {% if photos.count %}
+      {% for photo in photos %}
         <div class="card">
           <div class="card-content">
             <a href="{% url 'photos_detail' photo.id %}">
