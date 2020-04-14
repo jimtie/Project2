@@ -19,9 +19,9 @@
             <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
               <option selected>Choose...</option>
-              {% for album in albums.all %}
+              <!-- {% for album in albums.all %}
                 <option value="">{{ album.name }}</option>
-              {% endfor %}
+              {% endfor %} -->
             </select>
           </div>
           <div>
@@ -41,27 +41,32 @@
   </div>
 </div>
 
-
-<div class="col s6">
-    <h3>Available albums</h3>
-    {% for album in albums %}
-  <div class="card">
-    <a href="{% url 'albums_detail' album.id %}">
-      <div class="card-content">
-        <span class="card-title">{{ album.name }}</span>
-        <p>Description: {{ album.description }}</p>
-      </div>
-  </a>    
+<div class="row">
+  <div class="col s6">
+    <h3>{{ album.name }}</h3>
+    {% if photo.albums.count %}
+      {% for album in photo.albums.all %}
+        <div class="card">
+          <div class="card-content">
+            <!-- <a href="{% url 'photos_detail' photo.id %}"> -->
+              <img src = "{{album.name}}" class="card-img">
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No albums :(</h5>
+    {% endif %}
   </div>
-
-{% endfor %}
-<!--     {% if albums.count %} -->
+  <div class="col s6">
+    <h3>Available albums</h3>
+    {% if albums.count %}
       {% for album in albums %}
         <div class="card">
           <div class="card-content">
             <div class="card-content">
             <a href="{% url 'photos_detail' photo.id %}">
-              <h5>{{album.name}}1</h5>
+              <h5>{{album.name}}</h5>
             </a>
           </div>
           <div class="card-action">
@@ -72,10 +77,38 @@
           </div>
         </div>
       {% endfor %}
-<!--     {% else %}
+    {% else %}
       <h5>{{photo.name}} Already Has All albums Available</h5>
-    {% endif %} -->
+    {% endif %}
 </div>
+
+
+
+<!-- <div class="col s6">
+    <h3>Available albums</h3>
+    {% if albums.count %}
+      {% for album in albums %}
+        <div class="card">
+          <div class="card-content">
+            <div class="card-content">
+            <a href="{% url 'photos_detail' photo.id %}">
+              <h5>{{album.name}}</h5>
+            </a>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_photo' album.id photo.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{photo.name}} Already Has All albums Available</h5>
+    {% endif %}
+</div> -->
+
+
 
 
 

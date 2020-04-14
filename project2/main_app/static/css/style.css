@@ -2,6 +2,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  /*font-family: 'Baloo Paaji 2', cursive;*/
 }
 main {
   flex: 1 0 auto;
