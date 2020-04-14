@@ -65,7 +65,7 @@ def photos_detail(request, photo_id):
 @login_required 
 def assoc_photo(request, album_id, photo_id):
   Album.objects.get(id=album_id).photos.add(photo_id)
-  return redirect('photos_detail', album_id=album_id)
+  return redirect('albums_detail', album_id=album_id)
 	
 
 # def album_createalbum(request):

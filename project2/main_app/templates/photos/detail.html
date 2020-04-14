@@ -42,6 +42,32 @@
 </div>
 
 
+<div class="col s6">
+    <h3>Available albums</h3>
+    {% if albums.count %}
+      {% for album in albums.all %}
+        <div class="card">
+          <div class="card-content">
+            <div class="card-content">
+            <a href="{% url 'photos_detail' photo.id %}">
+              <h5>{{album.name}}</h5>
+            </a>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_photo' album.id photo.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{photo.name}} Already Has All albums Available</h5>
+    {% endif %}
+</div>
+
+
+
 <script>
   $.ajax({
   method: "GET",
