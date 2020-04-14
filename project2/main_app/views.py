@@ -69,30 +69,34 @@ def photos_index(request):
 # 	# albums_photo_doesnt_have = Album.objects.exclude(photo_id__in = photo)
 # 	return render(request, 'photos/detail.html', {'photo': photo, 'albums':albums})
 
-
+# @login_required 
+# def assoc_photo(request, album_id, photo_id):
+# 	Album.objects.get(id=album_id).photos.add(photo_id)
+# 	return redirect('albums_detail', album_id=album_id)
 
 @login_required 
 def albums_detail(request,album_id):
 	album = Album.objects.get(id=album_id)
-	photos_album_doesnt_have = Photo.objects.exclude(id__in = album.photos.all().values_list('id'))
-	print (photos_album_doesnt_have)
-	return render(request, 'albums/detail.html', {'album': album, 'photos': photos_album_doesnt_have})
+	photos = Photo.objects.all()
+	# photos_album_doesnt_have = Photo.objects.exclude(id__in = album.photos.all().values_list('id'))
+	# print (photos_album_doesnt_have)
+	return render(request, 'albums/detail.html', {'album': album, 'photos': photos})
 
 @login_required 
 def photos_detail(request, photo_id):
 	photo = Photo.objects.get(id=photo_id)
-	albums = Album.objects.all()
-	# albums_photo_doesnt_have = Album.objects.exclude(photo_id__in = photo)
-	return render(request, 'photos/detail.html', {'photo': photo, 'albums':albums})
-
-
-
-
+	# albums = Album.objects.all()
+	albums_photo_doesnt_have = Album.objects.exclude(id__in = photo.albums.all().values_list('id'))
+	return render(request, 'photos/detail.html', {'photo': photo, 'albums': albums_photo_doesnt_have})
 
 @login_required 
 def assoc_photo(request, album_id, photo_id):
-	Album.objects.get(id=album_id).photos.add(photo_id)
-	return redirect('albums_detail', album_id=album_id)
+	Photo.objects.get(id=photo_id).albums.add(album_id)
+	return redirect('photos_detail', photo_id=photo_id)
+
+
+
+
 	
 
 # def album_createalbum(request):
