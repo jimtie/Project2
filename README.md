@@ -9,6 +9,13 @@ Albums & Photos
 * [Technologies](#Technologies)
 * [Stretch Goals](#Stretch-Goals)
 
+## Test the App
+1. go to folder named "project2"
+2. input ```.env source/bin/activate``` in your commend line
+3. then input ```python3 manage.py runserver```
+4. open your browser, go to the site ```localhost://8000```
+5. test it by using user name: 'SSJ', password: '123456789'
+
 ## User Stories
 1. Upon going to site homepage, user will be prompted to create an account or sign into account. Site visitors will be able to sign up and log in to their homepage
 2. User profile page should contain: Username, email, password, description, Edit profile
@@ -25,7 +32,7 @@ Albums & Photos
 ![image](image/project_2_wireframe.jpeg)
 
 ## ERD
-![image](image/Image_from_iOS copy.jpg)
+![image](image/Image_from_iOS_copy.jpg)
 
 ## Technologies
 Python | Django | AJAX | HTML | CSS | JavaScript | Bootstrap 
