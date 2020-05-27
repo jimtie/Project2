@@ -1,4 +1,4 @@
-# Project2
+# Infrared
 Albums & Photos
 
 ## Index
