@@ -25,7 +25,7 @@ Albums & Photos
 ![image](image/project_2_wireframe.jpeg)
 
 ## ERD
-![image](image/Image_from_iOS copy.jpg)
+![image](image/"Image_from_iOS copy.jpg")
 
 ## Technologies
 Python | Django | AJAX | HTML | CSS | JavaScript | Bootstrap 
