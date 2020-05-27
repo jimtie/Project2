@@ -2,16 +2,17 @@
 {% block content %}
 
 <h1>Albums</h1>
+<div class="row flex-row">
 {% for album in albums %}
-
+<div class="col-md-4 mb-2 flex-column fluid">
   <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
+  <img class="card-img-top" src="https://img.freepik.com/free-vector/illustration-data-folder-icon_53876-6329.jpg?size=338&ext=jpg" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">{{ album.name }}</h5>
     <p class="card-text">Description: {{ album.description }}</p>
     <a href="{% url 'albums_detail' album.id %}" class="btn btn-primary">View Photos</a>
   </div>
 </div>
-
+</div>
 {% endfor %}
 {% endblock %}

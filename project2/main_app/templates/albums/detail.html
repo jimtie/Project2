@@ -4,8 +4,8 @@
 <div class="row">
   <div class="col s6">
     <h3>{{ album.name }}'s photos</h3>
-    {% if album.photos.count %}
-      {% for photo in album.photos.all %}
+    {% if photos.count %}
+      {% for photo in photos %}
         <div class="card">
           <div class="card-content">
             <a href="{% url 'photos_detail' photo.id %}">
@@ -18,7 +18,7 @@
       <h5>No photos :(</h5>
     {% endif %}
   </div>
-  <div class="col s6">
+<!--   <div class="col s6">
     <h3>Available photos</h3>
     {% if photos.count %}
       {% for photo in photos.all %}
@@ -39,7 +39,7 @@
       {% endfor %}
     {% else %}
       <h5>{{album.name}} Already Has All photos Available</h5>
-    {% endif %}
+    {% endif %} -->
 </div>
 
 
